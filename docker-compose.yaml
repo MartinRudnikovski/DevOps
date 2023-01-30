@@ -1,0 +1,35 @@
+version: '3'
+
+services:
+
+  devops-postgres:
+    image: 'postgres:9.6.24-alpine'
+    container_name: database
+    volumes:
+      - /var/lib/DevOpsProjectPostgresql/data
+    ports:
+      - "5432:5432"
+    environment:
+      - POSTGRES_DB=DevOps
+      - POSTGRES_USER=user
+      - POSTGRES_PASSWORD=123
+
+  devops-backend:
+    build: ./backend
+    container_name: DevOps-backend
+    environment:
+      - DB_SERVER=DevOps
+      - DB_USERNAME=user
+      - DB_PASSWORD=123
+    ports:
+      - "8080:8080"
+    links:
+      - devops-postgres
+
+  devops-frontend:
+    build: ./frontend
+    container_name: DevOps-frontend
+    ports:
+      - "3000:3000"
+    links:
+      - devops-backend
