@@ -1,0 +1,15 @@
+kind: PersistentVolume
+apiVersion: v1
+metadata:
+  name: {{ .Values.database.volume.persistentVolumeName }}
+  labels:
+    type: local
+    app: postgres
+spec:
+  storageClassName: manual
+  capacity:
+    storage: {{ .Values.database.volume.storage }}
+  accessModes:
+    - {{ .Values.database.volume.accessMode }}
+  hostPath:
+    path: "/mnt/data"

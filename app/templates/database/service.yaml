@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ .Values.database.appName }}
+  labels:
+    app: {{ .Values.database.appName }}
+    tier: {{ .Values.database.service.spec.selector.tier }}
+spec:
+  ports:
+    - port: {{ .Values.database.service.spec.ports.port }}
+      targetPort: {{ .Values.database.service.spec.ports.targetPort }}
+  selector:
+    app: {{ .Values.database.appName }}
+    tier: {{ .Values.database.service.spec.selector.tier }}
+  type: {{ .Values.database.service.spec.type }}

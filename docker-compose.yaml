@@ -12,22 +12,22 @@ services:
     environment:
       - POSTGRES_DB=DevOps
       - POSTGRES_USER=user
-      - POSTGRES_PASSWORD=123
+      - POSTGRES_PASSWORD=user
 
   devops-backend:
-    build: ./backend
+    build: martinrudnikovski/backend
     container_name: DevOps-backend
     environment:
-      - DB_SERVER=DevOps
+      - DB_SERVER=jdbc:postgresql://postgresql:5432/DevOps?useSSL=false
       - DB_USERNAME=user
-      - DB_PASSWORD=123
+      - DB_PASSWORD=user
     ports:
       - "8080:8080"
     links:
       - devops-postgres
 
   devops-frontend:
-    build: ./frontend
+    build: martinrudnikovski/frontend
     container_name: DevOps-frontend
     ports:
       - "3000:3000"
