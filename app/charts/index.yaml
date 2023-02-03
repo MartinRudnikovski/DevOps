@@ -1,0 +1,14 @@
+apiVersion: v1
+entries:
+  DevOpsProject:
+  - apiVersion: v2
+    appVersion: 0.0.1
+    created: "2023-02-03T09:26:27.6119014+01:00"
+    description: Project for DevOps
+    digest: fc10b5fca06cc529790dc56cf0cd9612a899d8aee631bc41eb1521322054b9d4
+    name: DevOpsProject
+    type: application
+    urls:
+    - DevOpsProject-0.1.0.tgz
+    version: 0.1.0
+generated: "2023-02-03T09:26:27.6077124+01:00"
