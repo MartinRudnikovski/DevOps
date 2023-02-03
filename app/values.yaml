@@ -45,7 +45,7 @@ backend:
 
 database:
   appName: postgres
-  replicas: 2
+  replicas: 1
   containerName: postgres-container
   containerPort: 5432
   image:
