@@ -1,0 +1,55 @@
+appVersion: v1
+backend:
+  appName: spring-boot-app
+  replicas: 1
+  containerName: spring-boot-container
+  containerPort: 8080
+  image:
+    repository: martinrudnikovski/backend
+    tag: latest
+  service:
+    spec:
+      ports:
+        port: 8080
+        protocol: TCP
+        name: http
+        targetPort: 8080
+      selector:
+        tier: backend
+      type: LoadBalancer
+  config:
+    name: backend-config
+
+
+database:
+  appName: postgres
+  replicas: 1
+  containerName: postgres-container
+  containerPort: 5432
+  image:
+    repository: postgres
+    tag: 9.6.24-alpine
+    imagePullPolicy: IfNotPresent
+  volume:
+    mountPath: /var/lib/DevOpsProjectPostgresql/data
+    name: postgesql
+    persistentVolumeClaimName: postgres-claim
+    persistentVolumeName: postgres-claim
+    storage: 5Gi
+    accessMode: ReadWriteMany
+  service:
+    spec:
+      ports:
+        port: 5432
+        targetPort: 5432
+        protocol: TCP
+        name: http
+      selector:
+        tier: database
+      type: LoadBalancer
+  config:
+    name: postgres-config
+    data:
+      POSTGRES_DB: DevOps
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: 123

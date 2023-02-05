@@ -1,0 +1,20 @@
+appVersion: v1
+appName: react-app
+replicas: 1
+containerName: react-app-container
+containerPort: 3000
+image:
+  repository: martinrudnikovski/frontend
+  tag: latest
+service:
+  spec:
+    ports:
+      port: 3000
+      protocol: TCP
+      name: http
+    selector:
+      tier: frontend
+    type: LoadBalancer
+config:
+  name: frontend-config
+  #data:

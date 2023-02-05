@@ -1,0 +1,36 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Values.database.appName }}
+  labels:
+    app: {{ .Values.database.appName }}
+    tier: {{ .Values.database.service.spec.selector.tier }}
+spec:
+  selector:
+    matchLabels:
+      app: {{ .Values.database.appName }}
+  replicas: {{ .Values.database.replicas }}
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: {{ .Values.database.appName }}
+        tier: {{ .Values.database.service.spec.selector.tier }}
+    spec:
+      containers:
+        - name: {{ .Values.database.containerName }}
+          image: {{ .Values.database.image.repository }}:{{ .Values.database.image.tag}}
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: {{ .Values.database.containerPort }}
+          envFrom:
+            - configMapRef:
+                name: {{ .Values.database.config.name }}
+          volumeMounts:
+            - mountPath: {{ .Values.database.volume.mountPath }}
+              name: {{ .Values.database.volume.name }}
+      volumes:
+        - name: {{ .Values.database.volume.name }}
+          persistentVolumeClaim:
+            claimName: {{ .Values.database.volume.persistentVolumeClaimName }}
