@@ -1,0 +1,22 @@
+name: Docker Image CI
+
+on:
+  push:
+    branches: [ "master" ]
+  pull_request:
+    branches: [ "master" ]
+
+jobs:
+
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v3
+    - name: Build the Docker image for backend
+      run: docker build ./backend --file Dockerfile --tag martinrudnikovski/backend
+
+    - uses: actions/checkout@v3
+    - name: Build the Docker image for frontend
+      run: docker build ./frontend --file Dockerfile --tag martinrudnikovski/frontend
