@@ -15,8 +15,14 @@ jobs:
     steps:
     - uses: actions/checkout@v3
     - name: Build the Docker image for backend
-      run: docker build ./backend --file Dockerfile --tag martinrudnikovski/backend
+      run: |
+        echo "${{secrets.DOCKER_PW}}" | docker login -u "martinrudnikovski" --password-stdin 
+        docker image build ./backend --file Dockerfile
+        docker push martinrudnikovski/backend:latest
 
     - uses: actions/checkout@v3
     - name: Build the Docker image for frontend
-      run: docker build ./frontend --file Dockerfile --tag martinrudnikovski/frontend
+      run: |
+        echo "${{secrets.DOCKER_PW}}" | docker login -u "martinrudnikovski" --password-stdin 
+        docker image build ./backend --file Dockerfile 
+        docker push martinrudnikovski/frontend:latest
