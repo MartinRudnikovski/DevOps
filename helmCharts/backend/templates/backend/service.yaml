@@ -9,7 +9,6 @@ spec:
     - port: {{ .Values.backend.service.spec.ports.port }}
       protocol: {{ .Values.backend.service.spec.ports.protocol }}
       name: {{ .Values.backend.service.spec.ports.name }}
-      targetPort: {{ .Values.backend.service.spec.ports.targetPort }}
   selector:
     app: {{ .Values.backend.appName }}
     tier: {{ .Values.backend.service.spec.selector.tier }}

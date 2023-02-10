@@ -8,7 +8,6 @@ metadata:
 spec:
   ports:
     - port: {{ .Values.database.service.spec.ports.port }}
-      targetPort: {{ .Values.database.service.spec.ports.targetPort }}
   selector:
     app: {{ .Values.database.appName }}
     tier: {{ .Values.database.service.spec.selector.tier }}
