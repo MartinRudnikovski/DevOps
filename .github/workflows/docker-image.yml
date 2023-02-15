@@ -46,20 +46,3 @@ jobs:
           context: ./frontend
           push: true
           tags: martinrudnikovski/frontend:latest
-          
-  deployment:
-    runs-on: 'ubuntu-latest'
-    steps:
-    - uses: actions/checkout@v1
-    - name: 'Deploy'
-      uses: 'deliverybot/helm@v1'
-      with:
-        release: 'martinrudnikovski/backend'
-        namespace: 'test'
-        chart: './helmCharts/backend'
-        value-files: >-
-          [
-            "values.yaml"
-          ]
-      env:
-        KUBECONFIG_FILE: '${{ secrets.KUBECONFIG }}'
