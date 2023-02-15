@@ -8,12 +8,6 @@ jobs:
     runs-on: 'ubuntu-latest'
     steps:
       - uses: actions/checkout@v1
-      - name: Prep helm chart
-        run: |
-          mv ./app/Chart.yaml ./app/Chart.old.yaml &&
-          cat ./app/Chart.old.yaml | grep -v appVersion > ./app/Chart.yaml &&
-          echo -e "\r\nappVersion: v${GITHUB_REF##*/}\r\n" >> ./app/Chart.yaml &&
-          cat ./app/Chart.yaml
       - name: Deploy
         uses: WyriHaximus/github-action-helm3@v2
         with:
