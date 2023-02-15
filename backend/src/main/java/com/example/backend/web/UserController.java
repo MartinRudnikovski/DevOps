@@ -27,6 +27,9 @@ public class UserController {
 
     @PostMapping("/save")
     public ResponseEntity<String> saveUserByUsername(@RequestBody UserHelper userHelper){
+
+        System.out.println("\n\n\nUser saved.\n\n\n");
+
         return userService.saveUser(userHelper.getUsername(), userHelper.getName(), userHelper.getSurname()) != null ?
                 ResponseEntity.ok().body("User created!") :
                 ResponseEntity.badRequest().build();
