@@ -31,7 +31,7 @@ jobs:
           java-version: '17'
           distribution: 'temurin'
       - name: Build with Maven
-        run: mvn --batch-mode --update-snapshots package
+        run: mvn -f ./backend --batch-mode --update-snapshots package
       -
         name: Build and push backend
         uses: docker/build-push-action@v4
