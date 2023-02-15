@@ -1,6 +1,8 @@
 name: Deploy
 on:
-  ['deployment']
+  push:
+    branches:
+      ["master"]
 jobs:
   deployment:
     runs-on: 'ubuntu-latest'
@@ -15,5 +17,7 @@ jobs:
       - name: Deploy
         uses: WyriHaximus/github-action-helm3@v2
         with:
-          exec: helm upgrade app ./app/ --install --wait --atomic --namespace=test --set=app.name=app --values=./app/values.yaml
+          exec: |
+            helm upgrade backend ./helmCharts/backend --install --wait --atomic --namespace=test
+            helm upgrade frontend ./helmCharts/frontend --install --wait --atomic --namespace=test
           kubeconfig: '${{ secrets.KUBECONFIG }}'
