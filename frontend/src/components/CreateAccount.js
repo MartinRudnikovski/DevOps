@@ -64,9 +64,9 @@ const CreateAccount = (props) => {
                     <button onClick={handleSubmit} type='submit' >Done</button>
                 </div>
 
-                <div className='col'>
-                    <button>This is a dummy button.</button>
-                </div>
+                {/*<div className='col'>*/}
+                {/*    <button>This is a dummy button.</button>*/}
+                {/*</div>*/}
 
             </div>
         </div>
