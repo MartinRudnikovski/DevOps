@@ -1,0 +1,12 @@
+---
+- hosts: localhost
+
+  tasks:
+    - name: Install and deploy app
+      copy:
+        src: backend/target/mvnw
+        dest: /tmp/
+        owner: pi
+
+    - name: Deploy backend
+
